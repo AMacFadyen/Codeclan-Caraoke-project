@@ -23,10 +23,10 @@ class Rooms
     end
 
     def check_in(guest)
-        if guest.group_size <= @max_capacity
+        if guest.group_size <= @max_capacity & @current_guests == []
         @current_guests << guest
         else
-            return "I'm afraid that room is too small for your group."
+            return "I'm afraid that room is unavailable for your group"
         end
     end
 
@@ -38,13 +38,11 @@ class Rooms
         return @max_capacity
     end
 
-    def available_rooms(guest)
-        for room in @rooms
-            if room.room_capacity >= guest.group_size && room.get_current_guests() == []
-                return "#{room.get_room_name} is available."
-            else
-                return "I'm afraid no rooms are available at the moment."
-            end
+    def available_room_for(guest)
+        if @max_capacity >= guest.group_size && room.get_current_guests() == []
+            return "#{@room_name} is available"
+        else
+            return "I'm afraid that room is unavailable."
         end
     end
 

@@ -64,7 +64,7 @@ class TestRooms < MiniTest::Test
 
     def test_which_room_can_hold_group()
         expected = [@room3, @room4]
-        actual = @rooms.available_rooms(@guest_group3)
+        actual = @rooms.map{ |room| room.available_room_for(@guest_group3)}
         assert_equal(expected, actual)
     end
 end
